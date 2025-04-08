@@ -40,7 +40,7 @@ class RegisterForm extends Component {
 
     handleInputChange = (e) => {
 
-        const { type, name, value, checked } = e.target;
+        const { type, name, value, checked, dateValue } = e.target;
 
         if (type === 'checkbox') {
             if (checked) {
@@ -51,6 +51,12 @@ class RegisterForm extends Component {
                 this.setState((prevState) => {
                     return { favorite: prevState.favorite.filter(item => item !== value) };
                 })
+            }
+        } if (type === 'date') {
+            if (dateValue) {
+                const date = new Date(dateValue);
+                const formatterDate = new `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+                this.setState({ date: formatterDate })
             }
         } else {
             this.setState({
@@ -132,7 +138,7 @@ class RegisterForm extends Component {
                     </div>
 
                     <div className='form-items'>
-                        <input type='submit' value="Dang ky" />
+                        <input type='submit' className='form-control' value="Dang ky" />
                     </div>
 
                 </form>
